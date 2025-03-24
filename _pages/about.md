@@ -37,7 +37,7 @@ My research interests lie in Artificial Intelligence Security and Knowledge Dist
 # 📖 Educations
 - *2025.09 - 2028.07*, Master of Engineering, College of Control Science and Engineering, Zhejiang University.
 - *2021.09 - 2025.07*, Bachelor of Engineering, School of Electrical and Information Engineering, Tianjin University.
-- 
+
 # 💬 Invited Talks
 - 1234
 
