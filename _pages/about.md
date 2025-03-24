@@ -30,9 +30,9 @@ My research interests lie in Artificial Intelligence Security and Knowledge Dist
 
 # 🎖 Honors and Awards
 - *2024.09*, Outstanding student of Tianjin. 
-- *2024.09*, National Scholarship(10000CNY). 
-- *2023.09*, National Scholarship(8000CNY). 
-- *2022.09*, National Scholarship(8000CNY). 
+- *2024.09*, National Scholarship, 10000CNY. 
+- *2023.09*, National Scholarship, 8000CNY. 
+- *2022.09*, National Scholarship, 8000CNY. 
 
 # 📖 Educations
 - *2025.09 - 2028.07*, Master of Engineering, College of Control Science and Engineering, Zhejiang University.
