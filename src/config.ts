@@ -1,127 +1,61 @@
 import type {
     SiteConfig,
     ProfileConfig,
-    LabConfig
 } from "./types/config"
 
 export const siteConfig: SiteConfig = {
-    title: "Motues",
-    subTitle: "记录生活",
+    title: "Jingqi Ji",
+    subTitle: "纪璟琦",
 
     backgroundImage: {
-        enabled: false, // If backgroundImage is not enabled, this will be used as the background color
-        url: "assets/background.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+        enabled: false,
+        url: "assets/background.png",
     },
 
     mirrorSite: {
-        enabled: true, // If mirrorSite is enabled, this will alart the user to visit the mirror site if user is in region below
-        url: "www.motues.top",
-        region: "CN" // Region of the mirror site, 
+        enabled: false,
+        url: "",
+        region: "CN"
     },
 
-    favicon: "/favicon/favicon.ico" // Path of the favicon, relative to the /public directory
+    favicon: "/favicon/favicon.ico"
 }
 
 export const profileConfig: ProfileConfig = {
-    avatar: "assets/Motues.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-    name: "Motues",
-    description: "Like River!",
-    introPage: "https://www.motues.top",
+    avatar: "assets/chingkei.jpg",
+    name: "Chingkei",
+    description: "EIE Master Student @ ZJU",
+    introPage: "/about",
     links: [
-        /* -------------------------------- Icon -------------------------------- */
-        // Visit https://icones.js.org/ for icon codes
-        // You will need to install the corresponding icon set if it's not already included
-        // `pnpm add @iconify-json/<icon-set-name>`
-        // Then add icon to defineConfig.integrationsin.icon in astro.config.mjs
-        // You can also use local svg icons end with .svg, relative to the src directory
-        // eg. `icon: "assets/icons/github.svg"`
-        /* -------------------------------- Color -------------------------------- */
-        // The colors a best to be clearly visible in both light and dark environments 
-        // If color is not set, it will use the icon's default color
         {
-          name: "Blog",
-          url: "https://blog.motues.top",
-          icon: "fa6-solid:tree", 
-          color: "#0dbc79",
+            name: "About",
+            url: "/about",
+            icon: "fa6-solid:user",
+            color: "#4a90d9",
         },
         {
-            name: "Note",
-            url: "https://note.motues.top",
-            icon: "fa6-solid:book",
-            color: "#b4a992",
+            name: "Blog",
+            url: "/blog",
+            icon: "fa6-solid:pen-nib",
+            color: "#e8913a",
         },
         {
-            name: "Lab",
-            url: "/lab",
-            icon: "fa6-solid:server",
-            color: "#72b6b3",
+            name: "Photo",
+            url: "/photo",
+            icon: "fa6-solid:camera",
+            color: "#d94f7a",
         },
         {
             name: "GitHub",
-            url: "https://github.com/Motues",
+            url: "https://github.com/JingqiJi03",
             icon: "fa6-brands:github",
             color: "#888",
         },
         {
-            name: "Netease",
-            url: "https://music.163.com/#/user/home?id=1601379853",
-            icon: "simple-icons:neteasecloudmusic",
-            color: "#ff2822",
-        },
-        {
-            name: "Mail",
-            url: "mailto:me@motues.top",
+            name: "Email",
+            url: "mailto:jijingqi@zju.edu.cn",
             icon: "fa6-solid:envelope",
-            color: "#43a4d1ff"
+            color: "#43a4d1",
         },
     ]
 }
-
-export const labConfig : LabConfig = [
-    // Icon and color rules are same as profileConfig
-    {
-        name: "BlockBoard",
-        description: "A real-time online block board",
-        url: "https://blockboard.motues.top",
-        icon: "svg-spinners:blocks-wave", 
-        color: "#9fa1a1ff"
-    },
-    {
-        name: "Uptime Kuma",
-        description: "A fancy self-hosted monitoring tool",
-        url: "https://uptime.motues.top/status/website",
-        icon: "assets/icons/uptime-kuma.svg",
-    },
-    {
-        name: "Meting API",
-        description: "A powerful music API ",
-        url: "https://meting.motues.top/",
-        icon: "fa6-solid:paperclip",
-        color: "#ffcf27"
-    },
-    {
-        name: "Server",
-        description: "A server monitor",
-        url: "https://server.motues.top",
-        icon: "svg-spinners:bars-scale",
-        color: "#50b8e9ff"
-    },
-    {
-        name: "OpenList",
-        description: "A storage service",
-        url: "https://openlist.motues.top",
-        icon: "assets/icons/openlist.svg",
-    },
-    {
-        name: "Umami",
-        description: "A website analytics platform",
-        url: "https://umami.motues.top",
-        icon: "simple-icons:umami",
-        color: "#000000"
-    },{
-        name: "RSSHub",
-        description: "Everything is RSSible",
-        url: "https://rsshub.motues.top",
-        icon: "assets/icons/rsshub.svg",
-    }
-]

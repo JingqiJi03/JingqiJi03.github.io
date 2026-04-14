@@ -1,0 +1,295 @@
+---
+const R2 = "https://photo.d405977a9b0baeb4b31c4b2f5bf1c0c2.r2.cloudflarestorage.com/";
+
+const posts = [
+  {
+    date: "2026-04-12",
+    title: "临安 · 看世界的热闹",
+    tags: ["旅行", "生活", "杭州"],
+    summary: "在杭州临安区找了一个安静的角落，坐看世界的热闹。四月的风刚好，阳光也温柔。",
+    images: [
+      R2 + "2026/04/8ca50f6ceee39dcf14dc6c2d118fe27b.jpg",
+      R2 + "2026/04/f4d25a34c4f0834b582513256ccc4883.jpg",
+    ],
+  },
+  {
+    date: "2026-04-05",
+    title: "一起做陶艺",
+    tags: ["生活", "手工"],
+    summary: "和心爱的人一起度过的午后，手心的泥巴慢慢变成了一只小小的杯子。美好的不只是作品，还有一起创造的时光。",
+    images: [
+      R2 + "2026/04/74750c03419225e219a7f0a0d430004f.jpg",
+      R2 + "2026/04/30869b7afbdf1a74431577c5a2562377.jpg",
+    ],
+  },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog - Jingqi Ji</title>
+  <link rel="shortcut icon" href="/favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #FAF9F7;
+      color: #3D3929;
+      min-height: 100vh;
+      line-height: 1.65;
+      font-size: 17px;
+    }
+
+    /* Nav */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,249,247,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(194,113,79,0.15);
+      padding: 12px 30px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-title { font-size: 18px; font-weight: 600; }
+    .nav-title a { color: #3D3929; text-decoration: none; transition: color 0.2s; }
+    .nav-title a:hover { color: #C2714F; }
+    .nav-links a {
+      color: #8C8577; text-decoration: none; margin-left: 20px; font-size: 14px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #C2714F; }
+
+    /* Header */
+    .blog-header {
+      text-align: center;
+      padding: 120px 20px 60px;
+      background: #FAF9F7;
+      border-bottom: 1px solid rgba(194,113,79,0.15);
+    }
+    .blog-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: #3D3929;
+      margin-bottom: 8px;
+    }
+    .blog-header p {
+      font-size: 15px;
+      color: #8C8577;
+      letter-spacing: 2px;
+    }
+
+    /* Timeline */
+    .timeline {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 50px 20px 60px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 120px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #C2714F, rgba(194,113,79,0.12));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 150px;
+      margin-bottom: 50px;
+      animation: fadeIn 0.6s ease-out both;
+    }
+    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+    .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+    .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+    /* Dot on timeline */
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 115px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #C2714F;
+      border: 2px solid #FAF9F7;
+      z-index: 1;
+    }
+
+    .timeline-date {
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 100px;
+      text-align: right;
+      font-size: 14px;
+      color: #C2714F;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .timeline-card {
+      background: transparent;
+      border-radius: 0;
+      padding: 0 0 0 16px;
+      border-left: 3px solid rgba(194,113,79,0.2);
+      transition: border-color 0.3s;
+    }
+    .timeline-card:hover {
+      border-left-color: #C2714F;
+    }
+    .timeline-card.has-images {
+      background: #F5F3EF;
+      border-radius: 12px;
+      padding: 20px 20px 16px 20px;
+      border-left: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: box-shadow 0.3s;
+    }
+    .timeline-card.has-images:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .timeline-card h3 {
+      font-size: 19px;
+      font-weight: 600;
+      color: #3D3929;
+      margin-bottom: 10px;
+    }
+
+    .timeline-tags {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .timeline-tags span {
+      font-size: 13px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(194,113,79,0.1);
+      color: #C2714F;
+      letter-spacing: 0.5px;
+    }
+
+    .timeline-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #8C8577;
+    }
+
+    .timeline-images {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .timeline-images img {
+      width: calc(50% - 4px);
+      border-radius: 8px;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .timeline-images img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    /* Empty state */
+    .empty-hint {
+      text-align: center;
+      padding: 40px 0;
+      color: #8C8577;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid rgba(194,113,79,0.15);
+      color: #8C8577;
+      font-size: 13px;
+    }
+    .footer a { color: #C2714F; text-decoration: none; }
+    .footer a:hover { filter: brightness(1.2); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      .timeline { padding: 30px 16px 40px; }
+      .timeline::before { left: 20px; }
+      .timeline-item { padding-left: 50px; }
+      .timeline-item::before { left: 14px; }
+      .timeline-date {
+        position: static;
+        text-align: left;
+        width: auto;
+        margin-bottom: 8px;
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-title"><a href="/">Jingqi Ji</a></div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/photo/">Photos</a>
+    </div>
+  </nav>
+
+  <div class="blog-header">
+    <h1>Blog</h1>
+    <p>Thoughts & Notes</p>
+  </div>
+
+  <div class="timeline">
+    {posts.map((post) => (
+      <div class="timeline-item">
+        <div class="timeline-date">{post.date}</div>
+        <div class={`timeline-card${post.images ? ' has-images' : ''}`}>
+          <h3>{post.title}</h3>
+          <div class="timeline-tags">
+            {post.tags.map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </div>
+          <p>{post.summary}</p>
+          {post.images && (
+            <div class="timeline-images">
+              {post.images.map((img: string) => (
+                <img src={img} alt={post.title} loading="lazy" />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="footer">
+    &copy; Jingqi Ji &nbsp;|&nbsp; <a href="/">Back to Home</a>
+  </div>
+
+</body>
+</html>

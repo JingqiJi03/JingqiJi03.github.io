@@ -1,0 +1,148 @@
+---
+const photos = [
+  "photo01.jpg", "photo02.jpg", "photo03.jpg", "photo04.jpg",
+  "photo05.jpg", "photo06.jpg", "photo07.jpg", "photo08.jpg",
+  "photo09.jpg", "photo10.jpg", "photo11.jpg", "photo12.jpg",
+  "photo13.jpg", "photo14.jpg", "photo15.jpg", "photo16.jpg",
+  "photo17.jpg", "photo18.jpg", "photo19.jpg", "photo20.jpg",
+  "photo21.jpg", "photo22.jpg"
+];
+---
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Photography - Jingqi Ji</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/photo/assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="/photo/assets/css/noscript.css" /></noscript>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    body {
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+    }
+    #wrapper {
+      min-height: auto !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+    .hero-header {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #0a0a0a url('/about/images/photos/hero-bg.jpg') center/cover no-repeat;
+      position: relative;
+      color: #fff;
+      padding: 120px 20px 60px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .hero-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 0;
+    }
+    .hero-header h1 {
+      position: relative;
+      z-index: 1;
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    .hero-header p {
+      position: relative;
+      z-index: 1;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      animation: fadeInUp 1.2s ease-out 0.3s both;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 700px) {
+      .hero-header { min-height: 50vh; padding: 100px 20px 40px; }
+      .hero-header h1 { font-size: 2.5rem; }
+      .hero-header p { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body class="is-preload">
+
+  <div id="wrapper">
+
+    <div class="hero-header">
+      <h1>Cherish every moment</h1>
+      <p></p>
+    </div>
+
+    <section id="main">
+      <div class="items">
+
+        {photos.slice(0, 11).map((photo, i) => (
+          <article class="item thumb span-1" id={`img${i + 1}`}>
+            <h2></h2>
+            <a href={`/about/images/photos/${photo}`} class="image">
+              <img src={`/about/images/photos/${photo}`} alt="" />
+            </a>
+          </article>
+        ))}
+
+      </div>
+
+      <div class="items" style="margin-left: 80px;">
+
+        {photos.slice(11).map((photo, i) => (
+          <article class="item thumb span-1" id={`img${i + 12}`}>
+            <h2></h2>
+            <a href={`/about/images/photos/${photo}`} class="image">
+              <img src={`/about/images/photos/${photo}`} alt="" />
+            </a>
+          </article>
+        ))}
+
+      </div>
+    </section>
+
+    <section id="footer">
+      <section>
+        <ul class="icons">
+          <li><a href="https://github.com/JingqiJi03" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+          <li><a href="mailto:jijingqi@zju.edu.cn" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        <ul class="copyright">
+          <li>&copy; Jingqi Ji</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </section>
+    </section>
+
+  </div>
+
+  <script is:inline src="/photo/assets/js/jquery.min.js"></script>
+  <script is:inline src="/photo/assets/js/jquery.poptrox.min.js"></script>
+  <script is:inline src="/photo/assets/js/browser.min.js"></script>
+  <script is:inline src="/photo/assets/js/breakpoints.min.js"></script>
+  <script is:inline src="/photo/assets/js/util.js"></script>
+  <script is:inline src="/photo/assets/js/main.js"></script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://motues.top',
+  site: 'https://jingqiji03.github.io',
   integrations: [
     icon({
       include: {

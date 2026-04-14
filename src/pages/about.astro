@@ -1,0 +1,270 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jingqi Ji 纪璟琦</title>
+  <meta name="description" lang="en" content="This is an academic website for Jingqi Ji">
+  <meta name="keywords" lang="en" content="Jingqi Ji" />
+
+  <link rel="shortcut icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/about/css/main.css">
+  <link rel="stylesheet" href="/about/css/custom.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <script is:inline src="/about/js/jquery-2.1.3.min.js"></script>
+
+  <style>
+    li.indented {
+      position: relative;
+      padding-left: 90px;
+    }
+    li.indented::before {
+      content: attr(data-date);
+      position: absolute;
+      left: 0;
+      top: 0;
+      white-space: nowrap;
+    }
+    .photo-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .photo-preview-grid img {
+      width: 100%; height: 180px; object-fit: cover;
+      border-radius: 4px; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .photo-preview-grid img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    @media (max-width: 700px) {
+      .photo-preview-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-preview-grid img { height: 140px; }
+    }
+    .back-link {
+      position: fixed;
+      top: 15px;
+      left: 20px;
+      z-index: 100;
+      font-size: 14px;
+      color: #2a7ae2;
+      text-decoration: none;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="/" class="back-link">&larr; Home</a>
+
+  <header class="site-header">
+    <div class="wrapper">
+      <nav class="site-nav">
+        <a href="#" class="menu-icon">
+          <svg viewBox="0 0 18 15">
+            <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+            <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+            <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </a>
+        <div class="trigger">
+          <a class="page-link" href="#bio"><b>About</b></a>
+          <a class="page-link" href="#news"><b>News</b></a>
+          <a class="page-link" href="#Education"><b>Education</b></a>
+          <a class="page-link" href="#publications"><b>Publications</b></a>
+          <a class="page-link" href="#awards"><b>Honors & Awards</b></a>
+          <a class="page-link" href="#misc"><b>Misc</b></a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div id="profile-cover" class="cover shallow-bg img-responsive">
+    <div id="profile-namecard" class="profile-wrapper wrapper-light">
+      <div id="my-pic" class="profile-col profile-col-1">
+        <img id="profile-avatar" src="/about/images/self-portrait/pypicture.jpg" alt="Me" class="circle-img border-dark"/>
+      </div>
+      <div id="my-contact" class="profile-col profile-col-2">
+        <div id="my-name" class="text-grey-dark">
+          Jingqi Ji<br>
+        </div>
+        <div id="my-title" class="text-grey">
+          EIE Master Student @ ZJU 25'
+        </div>
+        <div class="social-media">
+          <a href="https://github.com/JingqiJi03" class="icon-button github">
+            <i class="fa fa-github icon-github"></i>
+            <span></span>
+          </a>
+          <a href="mailto:jijingqi@zju.edu.cn" class="icon-button github">
+            <i class="fa fa-envelope icon-github"></i>
+            <span></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="wrapper">
+      <div id="bio" class="bio">
+        <h1 class="md-heading text-left">👋 About</h1>
+        <div class="bio-body" style="overflow:hidden;">
+          <p>
+            Hi, I am a Electronic and Information Engineering Master student at <a href="https://www.zju.edu.cn/"><strong>Zhejiang University</strong></a>, where I am advised by <a href="https://cwang-zju.github.io/">Dr. Cong Wang</a>.
+            I obtained my B.E. degree in <a href="https://www.tju.edu.cn/"><strong>Tianjin University</strong></a>.
+            <br><br>
+            My research focuses on VLA Efficiency and Knowledge Distillation.
+          </p>
+        </div>
+      </div>
+
+      <div id="Education" class="bio">
+        <h1 class="md-heading text-left">📖 Education</h1>
+        <div class="bio-body" style="overflow:hidden;">
+          <table>
+            <tbody>
+              <tr>
+                <td width="90%">
+                  <strong>M.E.</strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Sep. 2025 - Present<br>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <b>Zhejiang University</b>, Hangzhou, China.<br>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Master student in EIE<br>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Advisor: <a href="https://cwang-zju.github.io/">Dr. Cong Wang</a>
+                </td>
+                <td width="10%">
+                  <img src="/about/images/icon/zju.png" width="80%" style="display: block; margin-left: auto; margin-right: auto;">
+                </td>
+              </tr>
+              <tr style="height: 10px;"><td></td></tr>
+              <tr>
+                <td width="90%">
+                  <strong>B.E.</strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Sep. 2021 - Jun. 2025<br>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <b>Tianjin University</b>, Tianjin, China.<br>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp B.E. in Automation
+                </td>
+                <td width="10%">
+                  <img src="/about/images/icon/tju.jpg" width="80%" style="display: block; margin-left: auto; margin-right: auto;">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="news" class="bio">
+        <h1 class="md-heading text-left">🔥 News</h1>
+        <ul>
+          <li class="indented" data-date="[Sept, 2025]"> Started my Master's journey at Zhejiang University! </li>
+          <li class="indented" data-date="[Jun, 2025]"> Graduated from Tianjin University as an Outstanding Graduate. </li>
+        </ul>
+      </div>
+
+      <div id="publications" class="publications">
+        <h1 class="md-heading text-left">📝 Selected Publications</h1>
+        <div class="pub-list">
+          <p style="color: #828282;">Coming soon...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div id="awards" class="bio">
+        <h1 class="md-heading text-left">🥇 Honors & Awards</h1>
+        <ul>
+          <li> Outstanding Graduates of Tianjin University, 2025</li>
+          <li> Outstanding student of Tianjin, 2024</li>
+          <li> National Scholarship, 2024</li>
+          <li> National Scholarship, 2023</li>
+          <li> National Scholarship, 2022</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div id="misc" class="bio">
+        <div class="bio-body" style="overflow:hidden;">
+          <h1 class="md-heading text-left">
+            <i class="fa fa-heartbeat" aria-hidden="true"></i> Miscellaneous
+          </h1>
+          <p>The road ahead is winding, but the future is bright.<br></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div id="photos" class="bio">
+        <div class="bio-body" style="overflow:hidden;">
+          <h1 class="md-heading text-left">
+            <i class="fa fa-camera" aria-hidden="true"></i> Photography
+          </h1>
+          <p style="margin-bottom: 10px; color: #666;">Some moments I captured along the way. <a href="/photo/">View all photos &rarr;</a></p>
+          <div class="photo-preview-grid">
+            <img src="/about/images/photos/photo04.jpg" alt="Photo 1">
+            <img src="/about/images/photos/photo07.jpg" alt="Photo 2">
+            <img src="/about/images/photos/photo08.jpg" alt="Photo 3">
+            <img src="/about/images/photos/photo10.jpg" alt="Photo 4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrapper">
+      <div class="footer-col-wrapper">
+        <div class="footer-col footer-col-1">
+          <ul class="contact-list">
+            <li>Email:</li>
+            <li><a href="mailto:jijingqi@zju.edu.cn">jijingqi@zju.edu.cn</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-2">
+          <a href="https://github.com/JingqiJi03" class="icon-button github">
+            <i class="fa fa-github icon-github"></i>
+            <span></span>
+          </a>
+          <a href="mailto:jijingqi@zju.edu.cn" class="icon-button github">
+            <i class="fa fa-envelope icon-github"></i>
+            <span></span>
+          </a>
+        </div>
+        <div class="footer-col footer-col-3">
+          <p class="text">Last updated: Sept, 2025.<br>The style of this website is borrowed from <a href='http://hexianghu.com/'>Hexiang Hu's</a>.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="back-to-top">Top</div>
+
+  <script is:inline>
+    jQuery(document).ready(function() {
+      var offset = 220;
+      var duration = 500;
+      jQuery(window).scroll(function() {
+        if (jQuery(this).scrollTop() > offset) {
+          jQuery('.back-to-top').fadeIn(duration);
+        } else {
+          jQuery('.back-to-top').fadeOut(duration);
+        }
+      });
+      jQuery('.back-to-top').click(function(event) {
+        event.preventDefault();
+        jQuery('html, body').animate({scrollTop: 0}, duration);
+        return false;
+      });
+    });
+  </script>
+</body>
+</html>
