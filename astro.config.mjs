@@ -5,7 +5,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jingqiji03.github.io',
+  site: 'https://chingkei.cn',
   integrations: [
     icon({
       include: {
