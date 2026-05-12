@@ -1,0 +1,1223 @@
+---
+/**
+ * 2026 双人聊天报告 · 心动报告
+ *
+ * 13 页纵向滚动网页
+ * 所有内容在顶部配置区修改
+ */
+
+// ========== 内容配置 ==========
+const daysSince = 46; // 距第一次遇见天数
+const myName = "璟琦";
+const herName = "昞润";
+
+const data = {
+  firstMeet: "2026/04/05",
+  mostActiveDay: "周二",
+  mostActiveTime: "21:00",
+  mostActiveCount: 1134,
+  emotionalBalance: { me: 57.1, her: 42.9 },
+  fastestReply: "1 秒",
+  avgReply: "1 分",
+  slowestReply: "10.6 时",
+  interactions: 6417,
+  longestStreak: 46,
+  streakStart: "2026/04/05",
+  streakEnd: "2026/05/20",
+  totalMessages: 34191,
+  totalWords: 1272031,
+  images: 478,
+  voices: 116,
+  emojis: 1257,
+  myEmojiCount: 17,
+  herEmojiCount: 12,
+};
+
+const wordSets = {
+  shared: {
+    large: ["是啊", "对的", "真的", "我的天哪", "笑死了", "对啊对啊", "哈哈哈哈"],
+    medium: ["好吧", "我服了", "嗯嗯", "嘿嘿", "笑死我了", "对的对的", "是的", "我感觉", "是的是的", "确实", "对啊"],
+    small: ["然后", "哈哈哈", "哈哈哈哈哈哈", "我真服了", "我靠", "宝宝", "我去", "哦哦哦", "啊？", "我的天", "是啊是啊", "(bushi)"],
+  },
+  mine: {
+    large: ["咱就是说", "那必须的", "哈哈哈哈", "真的是", "是的哇"],
+    medium: ["嘿嘿", "确实", "是的", "是啊", "是吧", "哈哈哈", "对的", "嗯嗯", "好的哇"],
+    small: ["啊？", "我靠", "我发现", "哈哈"],
+  },
+  hers: {
+    large: ["笑死了哈哈哈哈哈哈", "对啊对啊", "我的天哪", "好滴好滴", "好啊好啊"],
+    medium: ["对啊", "真的", "hhhhhh", "是啊是啊", "对的对的", "所以", "但是", "我笑死了"],
+    small: ["是不是吧", "我的天", "我服了", "就是", "哦哦哦哦"],
+  },
+};
+// ========== 结束配置 ==========
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>2026 双人聊天报告 · 璟琦 & 昞润</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,700;9..40,900&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f7f3ec;
+        --text: #2e2a26;
+        --text-light: #9a8e82;
+        --accent: #a58661;
+        --accent-deep: #8f6f4e;
+        --accent-light: #c8b59e;
+        --brown: #9b7a55;
+        --rose: #c4876a;
+        --card-bg: rgba(255, 255, 255, 0.72);
+        --font-display: "DM Sans", system-ui, sans-serif;
+        --font-serif: "Noto Serif SC", serif;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html {
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+      }
+
+      html, body {
+        width: 100%;
+        background: var(--bg);
+        font-family: var(--font-serif);
+        color: var(--text);
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        overflow-x: hidden;
+      }
+
+      /* ========== 通用页样式 ========== */
+      .page {
+        min-height: 100vh;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page-inner {
+        max-width: 520px;
+        width: 100%;
+      }
+
+      .section-label {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 0.6rem;
+      }
+
+      .page-title {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: clamp(1.8rem, 6vw, 2.6rem);
+        line-height: 1.2;
+        color: var(--text);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-text {
+        font-size: 0.95rem;
+        line-height: 2;
+        color: var(--text-light);
+      }
+
+      .page-text strong {
+        color: var(--brown);
+        font-weight: 600;
+      }
+
+      /* ========== 动画基础 ========== */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      .fade-up.d1 { transition-delay: 0.15s; }
+      .fade-up.d2 { transition-delay: 0.3s; }
+      .fade-up.d3 { transition-delay: 0.45s; }
+      .fade-up.d4 { transition-delay: 0.6s; }
+      .fade-up.d5 { transition-delay: 0.75s; }
+      .fade-up.d6 { transition-delay: 0.9s; }
+
+      .page.visible .fade-up {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .scale-in {
+        opacity: 0;
+        transform: scale(0.7);
+        transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .scale-in.d1 { transition-delay: 0.2s; }
+      .scale-in.d2 { transition-delay: 0.4s; }
+      .scale-in.d3 { transition-delay: 0.6s; }
+
+      .page.visible .scale-in {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .counter {
+        font-family: var(--font-display);
+        font-weight: 900;
+        color: var(--brown);
+      }
+
+      /* ========== 第1页 封面 ========== */
+      .page-cover {
+        background: var(--bg);
+        align-items: flex-start;
+        padding-left: max(1.5rem, 8vw);
+      }
+
+      .page-cover .page-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cover-top-label {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 400;
+        letter-spacing: 0.25em;
+        color: var(--text-light);
+        margin-bottom: 2rem;
+      }
+
+      .cover-year {
+        font-family: var(--font-display);
+        font-weight: 300;
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        color: var(--text);
+        line-height: 1;
+      }
+
+      .cover-main-title {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: clamp(2.5rem, 10vw, 4.5rem);
+        color: var(--text);
+        line-height: 1.1;
+        margin-top: 0.2em;
+      }
+
+      .cover-names {
+        font-family: var(--font-serif);
+        font-weight: 600;
+        font-size: clamp(1.2rem, 4vw, 1.6rem);
+        color: var(--accent);
+        margin-top: 1.5rem;
+      }
+
+      .cover-sub {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-top: 1rem;
+        line-height: 1.8;
+      }
+
+      .cover-scroll-hint {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        color: var(--text-light);
+        letter-spacing: 0.1em;
+        animation: float-hint 2.5s ease-in-out infinite;
+      }
+
+      @keyframes float-hint {
+        0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+        50% { transform: translateX(-50%) translateY(-6px); opacity: 0.7; }
+      }
+
+      /* ========== 第2页 第一次遇见 ========== */
+      .big-date {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+        color: var(--text);
+        letter-spacing: -0.02em;
+        margin: 1rem 0;
+      }
+
+      .date-timeline {
+        width: 100%;
+        max-width: 280px;
+        height: 2px;
+        background: var(--accent-light);
+        margin: 1.5rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .date-timeline-fill {
+        position: absolute;
+        left: 0; top: 0;
+        height: 100%;
+        width: 0%;
+        background: var(--accent);
+        transition: width 1.5s ease;
+      }
+
+      .page.visible .date-timeline-fill { width: 100%; }
+
+      /* ========== 第3页 情感天平 ========== */
+      .balance-row {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .balance-side { text-align: center; flex: 1; }
+      .balance-name { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.4rem; }
+      .balance-pct { font-family: var(--font-display); font-weight: 900; font-size: clamp(2rem, 8vw, 3rem); color: var(--text); }
+
+      .balance-bar-wrap { width: 100%; max-width: 400px; margin: 1rem 0; }
+
+      .balance-bar {
+        width: 100%; height: 8px; border-radius: 4px;
+        overflow: hidden; display: flex; background: #eee8dd;
+      }
+
+      .balance-bar-me {
+        height: 100%; width: 0%;
+        background: var(--accent);
+        transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border-radius: 4px 0 0 4px;
+      }
+
+      .balance-bar-her {
+        height: 100%; width: 0%;
+        background: var(--accent-light);
+        transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+        border-radius: 0 4px 4px 0;
+      }
+
+      .page.visible .balance-bar-me { width: 57.1%; }
+      .page.visible .balance-bar-her { width: 42.9%; }
+
+      /* ========== 第4页 回复速度 ========== */
+      .reply-cards {
+        display: flex;
+        align-items: flex-end;
+        gap: 1.2rem;
+        margin: 1.5rem 0;
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .reply-card { text-align: center; flex: 1; }
+      .reply-card-center { flex: 1.4; }
+      .reply-card .reply-label { font-size: 0.7rem; color: var(--text-light); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+
+      .reply-circle {
+        width: 80px; height: 80px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 0.4rem;
+        background: rgba(237, 226, 210, 0.4);
+      }
+
+      .reply-circle-main {
+        width: 120px; height: 120px;
+        background: radial-gradient(circle, #ede2d2 0%, rgba(237,226,210,0) 70%);
+      }
+
+      .reply-value { font-family: var(--font-display); font-weight: 900; font-size: 1.4rem; color: var(--text); }
+      .reply-value-main { font-size: 2rem; }
+
+      /* ========== 第5页 连续聊天 ========== */
+      .streak-number {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: clamp(5rem, 20vw, 9rem);
+        line-height: 1;
+        color: var(--text);
+      }
+
+      .streak-unit {
+        font-family: var(--font-display);
+        font-weight: 300;
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        color: var(--accent);
+        letter-spacing: 0.15em;
+        margin-top: 0.2rem;
+      }
+
+      .streak-glow {
+        position: absolute;
+        width: 300px; height: 300px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(165,134,97,0.1) 0%, transparent 70%);
+        pointer-events: none;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) scale(0.5);
+        transition: transform 1.5s ease;
+      }
+
+      .page.visible .streak-glow { transform: translate(-50%, -50%) scale(1.5); }
+
+      .streak-timeline {
+        display: flex; align-items: center; gap: 0.5rem;
+        margin-top: 2rem; width: 100%; max-width: 300px;
+      }
+
+      .streak-timeline-line {
+        flex: 1; height: 2px; background: var(--accent-light);
+        position: relative; overflow: hidden;
+      }
+
+      .streak-timeline-fill {
+        position: absolute; left: 0; top: 0;
+        height: 100%; width: 0%;
+        background: #c9a46a;
+        transition: width 2s ease;
+      }
+
+      .page.visible .streak-timeline-fill { width: 100%; }
+
+      .streak-timeline-date {
+        font-family: var(--font-display);
+        font-size: 0.65rem;
+        color: var(--text-light);
+        white-space: nowrap;
+      }
+
+      /* ========== 第6页 常用语 ========== */
+      .word-tabs {
+        display: flex; gap: 0.5rem;
+        margin: 1rem 0 1.5rem; flex-wrap: wrap;
+      }
+
+      .word-tab {
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        border: 1px solid var(--accent-light);
+        color: var(--text-light);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .word-tab.active {
+        background: #fff;
+        color: var(--brown);
+        border-color: #fff;
+        box-shadow: 0 2px 12px rgba(80, 60, 40, 0.1);
+      }
+
+      .word-cloud {
+        display: flex; flex-wrap: wrap;
+        gap: 0.6rem 0.8rem;
+        justify-content: center;
+        padding: 1rem 0;
+        min-height: 120px;
+      }
+
+      .word-item {
+        transition: opacity 0.3s, transform 0.3s;
+        cursor: default;
+      }
+
+      .word-item:hover { transform: scale(1.1); }
+
+      .word-large { font-size: 1.2rem; font-weight: 700; color: #3a332d; }
+      .word-medium { font-size: 0.95rem; font-weight: 600; color: #8d7359; }
+      .word-small { font-size: 0.8rem; font-weight: 400; color: #b7a694; }
+
+      /* ========== 第7页 数据概览 ========== */
+      .data-grid {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 1.5rem; margin: 1.5rem 0;
+        width: 100%; max-width: 420px;
+      }
+
+      .data-item { text-align: center; }
+
+      .data-number {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        color: var(--brown);
+        line-height: 1.2;
+      }
+
+      .data-label { font-size: 0.75rem; color: var(--text-light); margin-top: 0.2rem; }
+
+      .data-row-three {
+        grid-column: 1 / -1;
+        display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;
+      }
+
+      /* ========== 第8页 表情包 ========== */
+      .sticker-wrap {
+        display: flex; justify-content: center; gap: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .sticker-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: 0 8px 28px rgba(80, 60, 40, 0.08);
+        padding: 1rem 1.2rem 1.2rem;
+        text-align: center;
+      }
+
+      .sticker-name {
+        font-size: 0.75rem;
+        color: var(--text-light);
+        margin-bottom: 0.6rem;
+      }
+
+      .sticker-img {
+        max-width: 140px;
+        max-height: 140px;
+        border-radius: 12px;
+        object-fit: contain;
+      }
+
+      /* ========== 第9页 谢谢 ========== */
+      .letter-page { text-align: center; }
+      .letter-page .page-text { text-align: left; line-height: 2.2; }
+      .highlight-num { color: var(--brown); font-weight: 600; }
+
+      /* ========== 第10页 我想告诉你 ========== */
+      .letter-card {
+        background: rgba(255, 255, 255, 0.65);
+        border-radius: 28px;
+        padding: 2rem 1.8rem;
+        margin: 1rem 0;
+        width: 100%; max-width: 440px;
+      }
+
+      .letter-card .page-text { line-height: 2.2; }
+      .letter-card .page-text p { margin-bottom: 0.8em; }
+
+      .continue-btn {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.7rem 2.5rem;
+        border-radius: 999px;
+        background: var(--brown);
+        color: #fff;
+        font-family: var(--font-serif);
+        font-size: 0.9rem;
+        cursor: pointer;
+        border: none;
+        transition: transform 0.3s ease;
+      }
+
+      .continue-btn:active { transform: scale(0.96); }
+
+      /* ========== 第11页 表白 ========== */
+      .page-confession { background: linear-gradient(170deg, #f7f3ec 0%, #f0e4d8 100%); }
+
+      .confession-big {
+        font-family: var(--font-serif);
+        font-weight: 700;
+        font-size: clamp(2rem, 9vw, 3.2rem);
+        color: var(--text);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .confession-sub {
+        font-size: 0.9rem; color: var(--text-light);
+        text-align: center; max-width: 300px;
+        line-height: 1.8; margin-bottom: 2rem;
+      }
+
+      .confession-question {
+        font-family: var(--font-serif);
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .confession-btns {
+        display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      }
+
+      .btn-yes {
+        padding: 0.8rem 3rem;
+        border-radius: 999px;
+        background: var(--brown);
+        color: #fff;
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
+        cursor: pointer;
+        border: none;
+        transition: transform 0.3s ease;
+      }
+
+      .btn-yes:active { transform: scale(0.96); }
+
+      .btn-think {
+        padding: 0.8rem 2rem;
+        border-radius: 999px;
+        background: transparent;
+        border: 1px solid var(--accent-light);
+        color: #8d7359;
+        font-family: var(--font-serif);
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        min-width: 140px;
+        text-align: center;
+      }
+
+      .btn-think:active { transform: scale(0.96); }
+
+      .heart-deco {
+        position: absolute; pointer-events: none; opacity: 0;
+        transition: opacity 1s ease;
+      }
+
+      .page.visible .heart-deco { opacity: 0.12; }
+
+      /* ========== 第12页 成功 ========== */
+      .page-success {
+        display: none;
+        background: linear-gradient(170deg, #faf6f1 0%, #f5ece2 100%);
+      }
+
+      .page-success.show { display: flex; }
+
+      .success-title {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+        color: var(--text);
+        margin-bottom: 1rem;
+      }
+
+      .success-big-text {
+        font-family: var(--font-serif);
+        font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+        color: var(--text);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .cert-card {
+        background: #fff;
+        border: 1.5px solid var(--accent-light);
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
+        width: 100%; max-width: 380px;
+        box-shadow: 0 12px 40px rgba(80, 60, 40, 0.08);
+      }
+
+      .cert-title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        text-align: center;
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid rgba(200, 181, 158, 0.3);
+      }
+
+      .cert-row {
+        display: flex; justify-content: space-between;
+        padding: 0.5rem 0; font-size: 0.85rem;
+      }
+
+      .cert-key { color: var(--text-light); }
+      .cert-val { color: var(--text); font-weight: 600; }
+      .cert-val.confirmed { color: var(--accent); }
+
+      .cert-note {
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--text-light);
+        margin-top: 0.8rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid rgba(200, 181, 158, 0.3);
+      }
+
+      .success-footer {
+        font-size: 0.85rem; color: var(--text-light);
+        margin-top: 2rem; text-align: center; line-height: 1.8;
+      }
+
+      /* ========== 第13页 彩蛋 ========== */
+      .page-easter { display: none; background: var(--bg); }
+      .page-easter.show { display: flex; }
+
+      .easter-title {
+        font-family: var(--font-serif);
+        font-weight: 700;
+        font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+        color: var(--text);
+        margin-bottom: 1.5rem;
+      }
+
+      .easter-cards {
+        display: flex; flex-direction: column; gap: 1rem;
+        width: 100%; max-width: 400px;
+      }
+
+      .easter-card {
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 16px;
+        padding: 1.2rem 1.4rem;
+        box-shadow: 0 4px 20px rgba(80, 60, 40, 0.05);
+      }
+
+      .easter-card-title {
+        font-family: var(--font-display);
+        font-weight: 900;
+        font-size: 1.1rem;
+        color: var(--brown);
+        margin-bottom: 0.4rem;
+      }
+
+      .easter-card-text { font-size: 0.85rem; color: var(--text-light); line-height: 1.8; }
+
+      .easter-end { text-align: center; margin-top: 2rem; }
+      .easter-end-line1 { font-family: var(--font-display); font-weight: 300; font-size: 0.85rem; color: var(--text-light); letter-spacing: 0.1em; }
+      .easter-end-line2 { font-family: var(--font-serif); font-size: 0.9rem; color: var(--accent); margin-top: 0.3rem; }
+
+      /* ========== 撒花 ========== */
+      .confetti-piece { position: fixed; pointer-events: none; z-index: 200; }
+
+      /* ========== 响应式 ========== */
+      @media (max-width: 400px) {
+        .reply-cards { gap: 0.6rem; }
+        .reply-circle { width: 60px; height: 60px; }
+        .reply-circle-main { width: 90px; height: 90px; }
+        .emoji-cards { flex-direction: column; }
+      }
+
+      @media print { body { display: none; } }
+    </style>
+  </head>
+  <body>
+    <!-- ====== 第1页 封面 ====== -->
+    <section class="page page-cover" data-page="0">
+      <div class="page-inner">
+        <div class="cover-top-label fade-up">WILLOW &middot; DUAL REPORT</div>
+        <div class="cover-year fade-up d1">2026年</div>
+        <h1 class="cover-main-title fade-up d2">双人聊天报告</h1>
+        <p class="cover-names fade-up d3">璟琦 &amp; 昞润 ✨</p>
+        <p class="cover-sub fade-up d4">每一次对话，都悄悄变得珍贵</p>
+      </div>
+      <div class="cover-scroll-hint fade-up d5">向下滑动，查看我们的故事 ↓</div>
+    </section>
+
+    <!-- ====== 第2页 第一次遇见 ====== -->
+    <section class="page" data-page="1">
+      <div class="page-inner">
+        <p class="section-label fade-up">故事的开始</p>
+        <h2 class="page-title fade-up d1">第一次遇见</h2>
+        <div class="big-date fade-up d2">2026 / 04 / 05</div>
+        <div class="date-timeline fade-up d3">
+          <div class="date-timeline-fill"></div>
+        </div>
+        <p class="page-text fade-up d4">从这一天开始，我们的聊天记录慢慢有了温度。</p>
+        <p class="page-text fade-up d5" style="margin-top: 0.8rem;">
+          距今天已经 <strong>{daysSince}</strong> 天
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== 第3页 情感天平 ====== -->
+    <section class="page" data-page="2">
+      <div class="page-inner">
+        <p class="section-label fade-up">亲密比</p>
+        <h2 class="page-title fade-up d1">情感的天平</h2>
+        <div class="balance-row fade-up d2">
+          <div class="balance-side">
+            <div class="balance-name">璟琦</div>
+            <div class="balance-pct counter" data-target="57.1" data-suffix="%" data-decimal="1">0%</div>
+          </div>
+          <div style="font-size: 1.5rem; color: var(--accent-light);">♥</div>
+          <div class="balance-side">
+            <div class="balance-name">昞润</div>
+            <div class="balance-pct counter" data-target="42.9" data-suffix="%" data-decimal="1">0%</div>
+          </div>
+        </div>
+        <div class="balance-bar-wrap fade-up d3">
+          <div class="balance-bar">
+            <div class="balance-bar-me"></div>
+            <div class="balance-bar-her"></div>
+          </div>
+        </div>
+        <p class="page-text fade-up d4">
+          <strong>57.1%</strong> 和 <strong>42.9%</strong>，<br />
+          不是简单的数字，<br />
+          是我们一来一回、慢慢靠近的痕迹。
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== 第4页 回复速度 ====== -->
+    <section class="page" data-page="3">
+      <div class="page-inner">
+        <p class="section-label fade-up">回复速度</p>
+        <h2 class="page-title fade-up d1">你说，我在</h2>
+        <div class="reply-cards">
+          <div class="reply-card scale-in d1">
+            <div class="reply-label">最快回复</div>
+            <div class="reply-circle">
+              <span class="reply-value">{data.fastestReply}</span>
+            </div>
+          </div>
+          <div class="reply-card reply-card-center scale-in d2">
+            <div class="reply-label">平均回复</div>
+            <div class="reply-circle reply-circle-main">
+              <span class="reply-value reply-value-main">{data.avgReply}</span>
+            </div>
+          </div>
+          <div class="reply-card scale-in d3">
+            <div class="reply-label">最慢回复</div>
+            <div class="reply-circle">
+              <span class="reply-value">{data.slowestReply}</span>
+            </div>
+          </div>
+        </div>
+        <p class="page-text fade-up d3" style="text-align: center; margin-top: 0.5rem;">
+          在 <strong>{data.interactions.toLocaleString()}</strong> 次互动中，平均每 {data.avgReply}，回应 1 句。
+        </p>
+        <p class="page-text fade-up d4" style="text-align: center; margin-top: 0.8rem;">
+          不是我刚好有空，<br />是看到你的消息时，我总想先回你。
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== 第5页 连续聊天 ====== -->
+    <section class="page" data-page="4">
+      <div class="streak-glow"></div>
+      <div class="page-inner" style="text-align: center; position: relative; z-index: 1;">
+        <p class="section-label fade-up">聊天火花</p>
+        <h2 class="page-title fade-up d1">最长连续聊天</h2>
+        <div class="streak-number counter fade-up d2" data-target="46" data-suffix="">0</div>
+        <div class="streak-unit fade-up d3">DAYS</div>
+        <div class="streak-timeline fade-up d4">
+          <span class="streak-timeline-date">{data.streakStart}</span>
+          <div class="streak-timeline-line">
+            <div class="streak-timeline-fill"></div>
+          </div>
+          <span class="streak-timeline-date">{data.streakEnd}</span>
+        </div>
+        <p class="page-text fade-up d5" style="margin-top: 1.5rem;">
+          46 天，不长也不短。<br />
+          但足够让我发现，<br />
+          和你聊天已经变成了我每天都会期待的事情。
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== 第6页 常用语 ====== -->
+    <section class="page" data-page="5">
+      <div class="page-inner">
+        <p class="section-label fade-up">好用词</p>
+        <h2 class="page-title fade-up d1">2026 年常用语</h2>
+        <div class="word-tabs fade-up d2">
+          <button class="word-tab active" data-tab="shared">共用词汇</button>
+          <button class="word-tab" data-tab="mine">我的专属</button>
+          <button class="word-tab" data-tab="hers">TA 的专属</button>
+        </div>
+        <div class="word-cloud fade-up d3" id="wordCloud">
+          {wordSets.shared.large.map((w) => (
+            <span class="word-item word-large">{w}</span>
+          ))}
+          {wordSets.shared.medium.map((w) => (
+            <span class="word-item word-medium">{w}</span>
+          ))}
+          {wordSets.shared.small.map((w) => (
+            <span class="word-item word-small">{w}</span>
+          ))}
+        </div>
+        <p class="page-text fade-up d4" style="text-align: center;">
+          这些词看起来很普通，<br />
+          可是因为是你说的，<br />
+          我就觉得它们都很可爱。
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== 第7页 数据概览 ====== -->
+    <section class="page" data-page="6">
+      <div class="page-inner">
+        <p class="section-label fade-up">年度统计</p>
+        <h2 class="page-title fade-up d1">2026 年数据概览</h2>
+        <div class="data-grid fade-up d2">
+          <div class="data-item">
+            <div class="data-number counter" data-target="34191">0</div>
+            <div class="data-label">总消息数</div>
+          </div>
+          <div class="data-item">
+            <div class="data-number counter" data-target="1272031">0</div>
+            <div class="data-label">总字数</div>
+          </div>
+          <div class="data-row-three">
+            <div class="data-item">
+              <div class="data-number counter" data-target="478">0</div>
+              <div class="data-label">图片</div>
+            </div>
+            <div class="data-item">
+              <div class="data-number counter" data-target="116">0</div>
+              <div class="data-label">语音</div>
+            </div>
+            <div class="data-item">
+              <div class="data-number counter" data-target="1257">0</div>
+              <div class="data-label">表情</div>
+            </div>
+          </div>
+        </div>
+        <p class="page-text fade-up d3" style="text-align: center;">
+          <strong>34,191</strong> 条消息，<br />
+          <strong>1,272,031</strong> 个字，<br />
+          它们记录的不只是聊天，<br />
+          也是我一点点喜欢上你的过程。
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== 第8页 表情包 ====== -->
+    <section class="page" data-page="7">
+      <div class="page-inner">
+        <h2 class="page-title fade-up" style="text-align: center;">我们的表情包记忆</h2>
+        <div class="sticker-wrap fade-up d2">
+          <div class="sticker-card">
+            <div class="sticker-name">璟琦</div>
+            <img class="sticker-img" src="/image.jpg" alt="璟琦的表情包" />
+          </div>
+          <div class="sticker-card">
+            <div class="sticker-name">昞润</div>
+            <img class="sticker-img" src="/image.jpg" alt="昞润的表情包" />
+          </div>
+        </div>
+        <p class="page-text fade-up d3" style="text-align: center;">
+          两双卡姿兰大眼睛对着凝视
+        </p>
+      </div>
+    </section>
+
+    <!-- ====== 第9页 谢谢 ====== -->
+    <section class="page letter-page" data-page="8">
+      <div class="page-inner">
+        <p class="section-label fade-up">结尾</p>
+        <h2 class="page-title fade-up d1">谢谢你一直在</h2>
+        <div class="page-text fade-up d2">
+          <p>看完这些数字之后，我突然觉得，它们好像不只是聊天记录。</p>
+        </div>
+        <div class="page-text fade-up d3">
+          <p>
+            <span class="highlight-num">2026/04/05</span> 的第一次遇见，
+            <span class="highlight-num">46 天</span> 的连续聊天，
+            <span class="highlight-num">34,191 条消息</span>，
+            <span class="highlight-num">1,272,031 个字</span>，
+            还有那些"哈哈哈""对啊对啊""我的天哪"。
+          </p>
+        </div>
+        <div class="page-text fade-up d4">
+          <p>它们都在告诉我一件事：</p>
+          <p style="font-weight: 600; color: var(--text); font-size: 1.1rem; margin-top: 0.5rem;">
+            你已经变成了我生活里很特别的人。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 第10页 我想告诉你 ====== -->
+    <section class="page" data-page="9">
+      <div class="page-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <h2 class="page-title fade-up">我想告诉你</h2>
+        <div class="letter-card fade-up d1">
+          <div class="page-text">
+            <p>昞润，</p>
+            <p>我一开始只是想做一份聊天报告。</p>
+            <p>可是做着做着，我发现自己记得很多很小的细节。</p>
+            <p>记得我们第一次遇见是 2026/04/05，记得我们连续聊了 46 天，也记得每次看到你消息时，我都想快一点回复。</p>
+            <p>所以我想，我应该认真告诉你一件事。</p>
+          </div>
+        </div>
+        <button class="continue-btn fade-up d3" id="continueBtn">继续</button>
+      </div>
+    </section>
+
+    <!-- ====== 第11页 表白 ====== -->
+    <section class="page page-confession" data-page="10">
+      <svg class="heart-deco" width="200" height="180" viewBox="0 0 200 180" style="top: 10%; left: 50%; transform: translateX(-50%);">
+        <path d="M100 160 C 40 120, 0 80, 0 50 C 0 20, 30 0, 60 0 C 80 0, 100 15, 100 40 C 100 15, 120 0, 140 0 C 170 0, 200 20, 200 50 C 200 80, 160 120, 100 160Z" fill="var(--accent-light)" />
+      </svg>
+      <div class="page-inner" style="text-align: center; position: relative; z-index: 1;">
+        <div class="confession-big fade-up">昞润，我喜欢你。</div>
+        <div class="confession-sub fade-up d1">
+          不是因为这份报告很浪漫，<br />
+          而是因为这些数据背后，<br />
+          全部都是我真实的心动。
+        </div>
+        <div class="confession-question fade-up d2">你愿意和我在一起吗？</div>
+        <div class="confession-btns fade-up d3">
+          <button class="btn-yes" id="btnYes">愿意</button>
+          <button class="btn-think" id="btnThink">我再想想</button>
+        </div>
+        <p class="page-text fade-up d4" id="thinkResponse" style="display: none; text-align: center; margin-top: 1.5rem; color: var(--accent);"></p>
+      </div>
+    </section>
+
+    <!-- ====== 第12页 成功 ====== -->
+    <section class="page page-success" id="pageSuccess" data-page="11">
+      <div class="page-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="success-title fade-up">报告更新完成</div>
+        <div class="success-big-text fade-up d1">
+          从今天开始，<br />我们就是正式版的我们啦。
+        </div>
+        <div class="cert-card fade-up d2">
+          <div class="cert-title">恋爱记录卡</div>
+          <div class="cert-row">
+            <span class="cert-key">姓名</span>
+            <span class="cert-val">璟琦 & 昞润</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-key">第一次遇见</span>
+            <span class="cert-val">2026/04/05</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-key">最长连续聊天</span>
+            <span class="cert-val">46 DAYS</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-key">总消息数</span>
+            <span class="cert-val">34,191</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-key">总字数</span>
+            <span class="cert-val">1,272,031</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-key">关系状态</span>
+            <span class="cert-val confirmed" id="certStatus">已确认</span>
+          </div>
+          <div class="cert-note">备注：请长期有效</div>
+        </div>
+        <div class="success-footer fade-up d3">
+          下一份报告，<br />我想和你写到永远。
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== 第13页 彩蛋 ====== -->
+    <section class="page page-easter" id="pageEaster" data-page="12">
+      <div class="page-inner" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="easter-title fade-up">给昞润的心动注释</div>
+        <div class="easter-cards">
+          <div class="easter-card fade-up d1">
+            <div class="easter-card-title">2026/04/05</div>
+            <div class="easter-card-text">那天只是第一次遇见，但现在回头看，好像一切都是从那里开始的。</div>
+          </div>
+          <div class="easter-card fade-up d2">
+            <div class="easter-card-title">1 秒</div>
+            <div class="easter-card-text">最快回复不是巧合。是因为你的消息对我来说真的很重要。</div>
+          </div>
+          <div class="easter-card fade-up d3">
+            <div class="easter-card-title">46 DAYS</div>
+            <div class="easter-card-text">连续聊天 46 天之后，我发现我已经习惯了每天有你。</div>
+          </div>
+          <div class="easter-card fade-up d4">
+            <div class="easter-card-title">34,191</div>
+            <div class="easter-card-text">这么多条消息里，我最想说的其实只有一句：我喜欢你。</div>
+          </div>
+        </div>
+        <div class="easter-end fade-up d5">
+          <p class="easter-end-line1">这份报告到这里结束，</p>
+          <p class="easter-end-line2">但我想和你的故事，才刚刚开始。</p>
+          <p style="margin-top: 1rem; font-family: var(--font-display); font-weight: 300; font-size: 0.75rem; color: var(--text-light); letter-spacing: 0.15em;">
+            THE END &middot; BUT ALSO START
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script is:inline>
+      (() => {
+        // ========== 数据 ==========
+        const wordSets = {
+          shared: {
+            large: ["是啊", "对的", "真的", "我的天哪", "笑死了", "对啊对啊", "哈哈哈哈"],
+            medium: ["好吧", "我服了", "嗯嗯", "嘿嘿", "笑死我了", "对的对的", "是的", "我感觉", "是的是的", "确实", "对啊"],
+            small: ["然后", "哈哈哈", "哈哈哈哈哈哈", "我真服了", "我靠", "宝宝", "我去", "哦哦哦", "啊？", "我的天", "是啊是啊", "(bushi)"],
+          },
+          mine: {
+            large: ["咱就是说", "那必须的", "哈哈哈哈", "真的是", "是的哇"],
+            medium: ["嘿嘿", "确实", "是的", "是啊", "是吧", "哈哈哈", "对的", "嗯嗯", "好的哇"],
+            small: ["啊？", "我靠", "我发现", "哈哈"],
+          },
+          hers: {
+            large: ["笑死了哈哈哈哈哈哈", "对啊对啊", "我的天哪", "好滴好滴", "好啊好啊"],
+            medium: ["对啊", "真的", "hhhhhh", "是啊是啊", "对的对的", "所以", "但是", "我笑死了"],
+            small: ["是不是吧", "我的天", "我服了", "就是", "哦哦哦哦"],
+          },
+        };
+
+        // ========== IntersectionObserver ==========
+        const pages = document.querySelectorAll(".page");
+        const observed = new Set();
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting && !observed.has(e.target)) {
+                observed.add(e.target);
+                e.target.classList.add("visible");
+                animateCounters(e.target);
+              }
+            });
+          },
+          { threshold: 0.35 }
+        );
+
+        pages.forEach((p) => io.observe(p));
+
+        // ========== 数字滚动 ==========
+        function animateCounters(container) {
+          const els = container.querySelectorAll(".counter[data-target]");
+          els.forEach((el) => {
+            if (el.dataset.animated) return;
+            el.dataset.animated = "1";
+            const target = parseFloat(el.dataset.target);
+            const suffix = el.dataset.suffix || "";
+            const decimal = parseInt(el.dataset.decimal) || 0;
+            const duration = 1500;
+            const start = performance.now();
+            function tick(now) {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = eased * target;
+              el.textContent =
+                (decimal > 0 ? current.toFixed(decimal) : Math.round(current).toLocaleString()) + suffix;
+              if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          });
+        }
+
+        // ========== 常用语 Tab ==========
+        const wordTabs = document.querySelectorAll(".word-tab");
+        const wordCloud = document.getElementById("wordCloud");
+
+        function renderWords(key) {
+          const set = wordSets[key];
+          wordCloud.innerHTML = "";
+          set.large.forEach((w) => { const s = document.createElement("span"); s.className = "word-item word-large"; s.textContent = w; wordCloud.appendChild(s); });
+          set.medium.forEach((w) => { const s = document.createElement("span"); s.className = "word-item word-medium"; s.textContent = w; wordCloud.appendChild(s); });
+          set.small.forEach((w) => { const s = document.createElement("span"); s.className = "word-item word-small"; s.textContent = w; wordCloud.appendChild(s); });
+        }
+
+        wordTabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            wordTabs.forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+            renderWords(tab.dataset.tab);
+          });
+        });
+
+        // ========== 继续 按钮 ==========
+        document.getElementById("continueBtn")?.addEventListener("click", () => {
+          const confession = document.querySelector('[data-page="10"]');
+          if (confession) confession.scrollIntoView({ behavior: "smooth" });
+        });
+
+        // ========== 我再想想 按钮 ==========
+        const thinkTexts = [
+          "没关系，我可以等你。",
+          "那我还能继续喜欢你吗？",
+          "好，那先把这份报告送给你。",
+        ];
+        let thinkCount = 0;
+        const btnThink = document.getElementById("btnThink");
+        const thinkResponse = document.getElementById("thinkResponse");
+
+        btnThink?.addEventListener("click", () => {
+          thinkResponse.style.display = "block";
+          thinkResponse.textContent = thinkTexts[Math.min(thinkCount, thinkTexts.length - 1)];
+          thinkResponse.classList.add("fade-up");
+          thinkCount++;
+          if (thinkCount >= thinkTexts.length) {
+            btnThink.textContent = "💗";
+          }
+        });
+
+        // ========== 愿意 按钮 ==========
+        document.getElementById("btnYes")?.addEventListener("click", () => {
+          const successPage = document.getElementById("pageSuccess");
+          const easterPage = document.getElementById("pageEaster");
+          successPage.classList.add("show");
+          io.observe(successPage);
+          spawnConfetti();
+          setTimeout(() => {
+            easterPage.classList.add("show");
+            io.observe(easterPage);
+          }, 600);
+          setTimeout(() => {
+            successPage.scrollIntoView({ behavior: "smooth" });
+          }, 300);
+        });
+
+        // ========== 撒花 ==========
+        function spawnConfetti() {
+          const colors = ["#c4876a", "#e8b4a0", "#c9a46a", "#f5c6bb", "#d4627a", "#f5a0b5", "#e0988c", "#a58661", "#c8b59e"];
+          for (let i = 0; i < 60; i++) {
+            const piece = document.createElement("div");
+            piece.className = "confetti-piece";
+            piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+            piece.style.left = Math.random() * 100 + "vw";
+            piece.style.top = "-10px";
+            const size = 4 + Math.random() * 8;
+            piece.style.width = size + "px";
+            piece.style.height = size + "px";
+            piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+            document.body.appendChild(piece);
+            const duration = 2000 + Math.random() * 2500;
+            const xDrift = (Math.random() - 0.5) * 200;
+            piece.animate(
+              [
+                { transform: "translateY(0) translateX(0) rotate(0deg)", opacity: 1 },
+                { transform: `translateY(100vh) translateX(${xDrift}px) rotate(${360 + Math.random() * 360}deg)`, opacity: 0 },
+              ],
+              { duration, easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)" }
+            ).onfinish = () => piece.remove();
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
